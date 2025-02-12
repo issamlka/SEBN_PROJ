@@ -13,13 +13,13 @@
     <!-- the working one -->
     <form method="GET" action="{{ route('view.pageone') }}">
         <div class="row mb-3">
-            <!-- Select By Dropdown -->
+            <!-- Select By Dropdown (dynamically filled) -->
             <div class="col">
                 <select id="selectBy" name="selectOption" class="form-select">
                     <option selected disabled>SELECT BY</option>
-                    @foreach($columns as $key => $label)
-                        <option value="{{ $key }}">{{ $label }}</option>
-                    @endforeach
+                    <option value="WHS">Warehouse (WHS)</option>
+                    <option value="KEYS">Keys</option>
+                    <option value="MENU">Menu</option>
                 </select>
             </div>
 
@@ -46,7 +46,6 @@
                 <th>WHS</th>
                 <th>KEYS</th> <!-- Added KEYS column -->
                 <th>MENU</th>
-                
             </tr>
         </thead>
         <tbody>
