@@ -6457,3 +6457,72 @@ header .form-inline .search-form.close {
         padding: 5px;
     }
 }
+
+/* Custom select box styling */
+.custom-select1 {
+    background-color: #f7f7f7;
+    color: #000000;
+
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+/* Remove border radius for dropdown list */
+.custom-select1 option {
+    border-radius: 0px;
+    background-color: #fff;
+    color: #000000;
+}
+
+/* Optional: Add a hover effect for better UX */
+.custom-select1:hover {
+    background-color: #d5d5d5;
+}
+
+.custom-select1 option:hover {
+    background-color: #d6eaf7;
+    color: #2b5a9c;
+}
+
+/* Placeholder text style */
+.custom-select1 option[selected] {
+    color: #fff;
+}
+
+.page_two {
+    width: 100px;
+    height: 50px;
+    color: black;
+    background: red;
+}
+.page_two a {
+    text-align: center;
+}
+
+.page_two_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.styled-button {
+    display: inline-block;
+    background-color: #382683; /* Adjust the color as needed */
+    color: white;
+    padding: 10px 20px;
+
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    width: 80%; /* Adjust based on sidebar width */
+    text-transform: uppercase;
+}
+
+.styled-button:hover {
+    background-color: #f7f7f7; /* Slightly darker shade on hover */
+}

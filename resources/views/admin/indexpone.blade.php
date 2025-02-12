@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Sufee Admin - HTML5 Admin Template</title>
+    <title>Sebn - table one</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -52,32 +52,7 @@
 
     <!-- Left Panel -->
 
-    <aside id="left-panel" class="left-panel">
-      <nav class="navbar navbar-expand-sm navbar-default">
-        <div class="navbar-header">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#main-menu"
-            aria-controls="main-menu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fa fa-bars"></i>
-          </button>
-          <a class="navbar-brand" href="./"
-            ><img src="{{asset('backend/admin_assets/images/SEBN-MA_logo.png')}}"
-          /></a>
-          <a class="navbar-brand hidden" href="./"
-            ><img src="images/logo2.png" alt="Logo"
-          /></a>
-        </div>
-
-        <!-- /.navbar-collapse -->
-      </nav>
-    </aside>
-    <!-- /#left-panel -->
+    @include('admin.body.sidebar')
 
     <!-- Left Panel -->
 
@@ -116,7 +91,7 @@
         <div class="">
             <!-- Select By Dropdown (dynamically filled) -->
             <div class="">
-                <select id="selectBy" name="selectOption" class="">
+                <select id="selectBy" name="selectOption" class="custom-select1">
                     <option selected disabled>SELECT BY</option>
                     <option value="WHS">Warehouse (WHS)</option>
                     <option value="KEYS">Keys</option>
@@ -126,15 +101,13 @@
 
             <!-- Options Dropdown (Dynamic) -->
             <div class="">
-                <select id="options" name="optionsvalue" class="">
+                <select id="options" name="optionsvalue" class="custom-select1">
                     <option selected disabled>OPTIONS</option>
                 </select>
             </div>
         </div>
 
-        <div class="">
-            <button type="submit" class="">Submit</button>
-        </div>
+        
     </form>
 
 
@@ -179,7 +152,7 @@
         </div>
 
 
-<script>
+        <script>
 $(document).ready(function(){
     let optionsData = @json($options);
 
@@ -190,6 +163,31 @@ $(document).ready(function(){
         $options.empty().append('<option selected disabled>OPTIONS</option>');
         optionsData[selectedColumn].forEach(value => {
             $options.append(new Option(value, value));
+        });
+    });
+
+    $('#options').on('change', function() {
+        let selectOption = $('#selectBy').val();
+        let optionsvalue = $(this).val();
+
+        $.ajax({
+            url: '{{ route("view.pageone") }}',
+            type: 'GET',
+            data: { selectOption, optionsvalue },
+            success: function(response) {
+                let tableBody = $('table tbody');
+                tableBody.empty();
+                response.data.forEach(row => {
+                    tableBody.append(`
+                        <tr>
+                            <td>${row.ACCOUNT}</td>
+                            <td>${row.WHS}</td>
+                            <td>${row.KEYS}</td>
+                            <td>${row.MENU}</td>
+                        </tr>
+                    `);
+                });
+            }
         });
     });
 });
