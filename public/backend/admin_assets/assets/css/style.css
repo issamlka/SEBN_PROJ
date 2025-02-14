@@ -6259,13 +6259,13 @@ header .form-inline .search-form.close {
     color: #272c33;
 }
 .dataTables_paginate .pagination li.active a {
-    background: #272c33;
-    border-color: #272c33;
+    background: #a0c8ff;
+    border-color: #a0c8ff;
     color: #fff;
 }
 .dataTables_paginate .pagination li:hover a {
-    background: #272c33;
-    border-color: #272c33;
+    background: #a0c8ff;
+    border-color: #a0c8ff;
     color: #fff;
 }
 
@@ -6499,9 +6499,6 @@ header .form-inline .search-form.close {
     color: black;
     background: red;
 }
-.page_two a {
-    text-align: center;
-}
 
 .page_two_button {
     display: flex;
@@ -6525,4 +6522,25 @@ header .form-inline .search-form.close {
 
 .styled-button:hover {
     background-color: #f7f7f7; /* Slightly darker shade on hover */
+}
+
+/* Table styling */
+#bootstrap-data-table-export {
+    background-color: #f7f7f7;
+}
+
+#bootstrap-data-table-export tbody tr:nth-child(odd) {
+    background-color: white; /* Alternating row color */
+}
+
+#bootstrap-data-table-export tbody tr:nth-child(even) {
+    background-color: #a0c8ff; /* Alternating row color */
+}
+
+#bootstrap-data-table-export tbody tr:hover {
+    background-color: #7ae29e; /* Hover effect with light blue */
+}
+
+#excel-btn {
+    margin-top: 7px;
 }

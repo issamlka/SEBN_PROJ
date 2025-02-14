@@ -103,7 +103,7 @@
             <th>ACCOUNT</th>
             <th>NAME</th>
             <th>MENU</th>
-            <th>GS_MENU</th>
+            <th>GS MENU</th>
         </tr>
     </thead>
     <tbody>

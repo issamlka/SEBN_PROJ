@@ -46,6 +46,8 @@
     />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
   </head>
 <body>
@@ -92,7 +94,7 @@
             <!-- Select By Dropdown (dynamically filled) -->
             <div class="">
                 <select id="selectBy" name="selectOption" class="custom-select1">
-                    <option selected disabled>SELECT BY</option>
+                    <option selected disabled>FILTER BY</option>
                     <option value="WHS">Warehouse (WHS)</option>
                     <option value="KEYS">Keys</option>
                     <option value="MENU">Menu</option>
@@ -107,49 +109,49 @@
             </div>
         </div>
 
+        <button type="submit" id="excel-btn" name="export" value="true" class="btn btn-success">Export to Excel</button>
+        </form>
         
     </form>
 
 
 
     <!-- Table -->
-    <div class="content mt-3">
-        <div class="animated fadeIn">
-          <div class="row">
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
             <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <strong class="card-title">Data Table</strong>
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ACCOUNT</th>
+                                    <th>WHS</th>
+                                    <th>KEYS</th> <!-- Added KEYS column -->
+                                    <th>MENU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data as $row)
+                                <tr>
+                                    <td>{{ $row->ACCOUNT }}</td>
+                                    <td>{{ $row->WHS }}</td>
+                                    <td>{{ $row->KEYS }}</td> <!-- Display KEYS data -->
+                                    <td>{{ $row->MENU }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="card-body">
-    <table id="bootstrap-data-table-export"
-    class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>ACCOUNT</th>
-                <th>WHS</th>
-                <th>KEYS</th> <!-- Added KEYS column -->
-                <th>MENU</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $row)
-            <tr>
-                <td>{{ $row->ACCOUNT }}</td>
-                <td>{{ $row->WHS }}</td>
-                <td>{{ $row->KEYS }}</td> <!-- Display KEYS data -->
-                <td>{{ $row->MENU }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    </div>
-              </div>
             </div>
-          </div>
         </div>
-        </div>
-        </div>
+    </div>
+</div>
 
 
         <script>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PageOneExport;
+
 
 class PageOneManagmentController extends Controller
 {
@@ -31,10 +34,16 @@ class PageOneManagmentController extends Controller
 
         $data = $query->get();
         $options = [
-            'WHS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->pluck('WHS'),
-            'KEYS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->pluck('KEYS'),
-            'MENU' => DB::table('pagetwo')->distinct()->pluck('MENU'),
+            'WHS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->orderBy('WHS', 'asc')->pluck('WHS'),
+            'KEYS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->orderBy('KEYS', 'asc')->pluck('KEYS'),
+            'MENU' => DB::table('pagetwo')->distinct()->orderBy('MENU', 'asc')->pluck('MENU'),
         ];
+
+        if ($request->has('export')) {
+            $selectOption = $request->selectOption;
+            $optionsvalue = $request->optionsvalue;
+            return Excel::download(new PageOneExport($selectOption, $optionsvalue), 'pageone_export.xlsx');
+        }
 
         return view('admin.indexpone', compact('data', 'columns', 'options'));
     }
