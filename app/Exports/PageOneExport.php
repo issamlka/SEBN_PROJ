@@ -6,6 +6,7 @@ use App\Models\PageOneManagment;
 use App\Models\PageTwoManagment;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
+
 class PageOneExport implements FromCollection
 {
     protected $selectOption;

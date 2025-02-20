@@ -12,39 +12,54 @@ use App\Exports\PageOneExport;
 class PageOneManagmentController extends Controller
 {
     public function ViewPageOne(Request $request)
-    {
-        $columns = [
-            'WHS' => 'Warehouse (WHS)',
-            'KEYS' => 'Keys',
-            'MENU' => 'Menu',
-        ];
+{
+    // Define columns for the dropdown
+    $columns = [
+        'WHS' => 'Warehouse (WHS)',
+        'KEYS' => 'Keys',
+        'MENU' => 'Menu',
+    ];
 
-        $query = DB::table('pageone')
-            ->leftJoin('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
-            ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU');
+    // Define the base query to get data
+    $query = DB::table('pageone')
+        ->leftJoin('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
+        ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU');
 
-        if ($request->ajax()) {
-            if ($request->has('selectOption')) {
-                $column = $request->selectOption;
-                $query->where($column, 'like', "%{$request->optionsvalue}%");
-            }
-            $data = $query->get();
-            return response()->json(['data' => $data]);
+    // Query to fetch data initially without any filters
+    $data = $query->get();
+
+    // Prepare options for dropdowns
+    $options = [
+        'WHS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->orderBy('WHS', 'asc')->pluck('WHS'),
+        'KEYS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->orderBy('KEYS', 'asc')->pluck('KEYS'),
+        'MENU' => DB::table('pagetwo')->distinct()->orderBy('MENU', 'asc')->pluck('MENU'),
+    ];
+
+    // Handle filtering via AJAX
+    if ($request->ajax()) {
+        if ($request->has('selectOption') && $request->has('optionsvalue')) {
+            $column = $request->selectOption;
+            $value = $request->optionsvalue;
+            $data = $query->where($column, 'like', "%{$value}%")->get();
+
+            return response()->json([
+                'data' => $data,
+                'columns' => $columns,
+                'options' => $options
+
+            ]);
         }
 
-        $data = $query->get();
-        $options = [
-            'WHS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->orderBy('WHS', 'asc')->pluck('WHS'),
-            'KEYS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->orderBy('KEYS', 'asc')->pluck('KEYS'),
-            'MENU' => DB::table('pagetwo')->distinct()->orderBy('MENU', 'asc')->pluck('MENU'),
-        ];
-
-        if ($request->has('export')) {
-            $selectOption = $request->selectOption;
-            $optionsvalue = $request->optionsvalue;
-            return Excel::download(new PageOneExport($selectOption, $optionsvalue), 'pageone_export.xlsx');
-        }
-
-        return view('admin.indexpone', compact('data', 'columns', 'options'));
     }
+
+    // Handle export to Excel
+    if ($request->has('export')) {
+        $selectOption = $request->selectOption;
+        $optionsvalue = $request->optionsvalue;
+        return Excel::download(new PageOneExport($selectOption, $optionsvalue), 'pageone_export.xlsx');
+    }
+
+    // Return the view with initial data and options
+    return view('admin.indexpone', compact('data', 'columns', 'options'));
+}
 }

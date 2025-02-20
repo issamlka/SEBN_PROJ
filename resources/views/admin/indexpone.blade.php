@@ -162,7 +162,7 @@ $(document).ready(function(){
         let selectedColumn = $(this).val();
         let $options = $('#options');
 
-        $options.empty().append('<option selected disabled>OPTIONS</option>');
+        $options.empty().append('<option selected>OPTIONS</option>');
         optionsData[selectedColumn].forEach(value => {
             $options.append(new Option(value, value));
         });
@@ -177,17 +177,16 @@ $(document).ready(function(){
             type: 'GET',
             data: { selectOption, optionsvalue },
             success: function(response) {
-                let tableBody = $('table tbody');
-                tableBody.empty();
+                let table = $('#bootstrap-data-table-export').DataTable(); // Get DataTable instance
+                table.clear().draw(); // Clear existing table data
+
                 response.data.forEach(row => {
-                    tableBody.append(`
-                        <tr>
-                            <td>${row.ACCOUNT}</td>
-                            <td>${row.WHS}</td>
-                            <td>${row.KEYS}</td>
-                            <td>${row.MENU}</td>
-                        </tr>
-                    `);
+                    table.row.add([
+                        row.ACCOUNT,
+                        row.WHS,
+                        row.KEYS,
+                        row.MENU
+                    ]).draw(false); // Add new row and redraw table
                 });
             }
         });
@@ -195,23 +194,26 @@ $(document).ready(function(){
 });
 </script>
 
-<script src="{{asset('backend/admin_assets/vendors/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/assets/js/main.js')}}"></script>
+<!-- Load jQuery first -->
+<script src="{{ asset('backend/admin_assets/vendors/jquery/dist/jquery.min.js') }}"></script>
 
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/jszip/dist/jszip.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('backend/admin_assets/assets/js/init-scripts/data-table/datatables-init.js')}}"></script>
+<!-- Load Bootstrap -->
+<script src="{{ asset('backend/admin_assets/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Load DataTables JS files -->
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/jszip/dist/jszip.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('backend/admin_assets/vendors/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+
+<!-- Initialize DataTables (Must be after DataTables scripts) -->
+<script src="{{ asset('backend/admin_assets/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
+
 </body>
 </html>
