@@ -6458,17 +6458,22 @@ header .form-inline .search-form.close {
     }
 }
 
+form > div {
+    display: flex;
+    align-items: center; /* Aligns them properly */
+    gap: 10px; /* Adjust spacing between selects */
+}
 /* Custom select box styling */
 .custom-select1 {
     background-color: #f7f7f7;
     color: #000000;
-
     border: none;
     padding: 10px;
     font-size: 16px;
     width: 200px;
     margin: 5px 0;
     cursor: pointer;
+    margin-bottom: 15px;
 }
 
 /* Remove border radius for dropdown list */
@@ -6542,5 +6547,17 @@ header .form-inline .search-form.close {
 }
 
 #excel-btn {
+    border-radius: 20px;
     margin-top: 7px;
+    margin-left: 20px;
+}
+
+#excel-btn2 {
+    border-radius: 20px;
+    margin-top: 7px;
+    margin-left: 20px;
+}
+
+.the_two_select {
+    margin-top: 5px;
 }

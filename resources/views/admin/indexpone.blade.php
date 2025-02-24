@@ -1,15 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js" lang="en">
-  <!--<![endif]-->
-
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Sebn - table one</title>
+    <title>Sebn - table two</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -38,6 +32,7 @@
     />
 
     <link rel="stylesheet" href="{{asset('backend/admin_assets/assets/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('backend/admin_assets/assets/css/style2.css')}}" />
 
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800"
@@ -46,48 +41,20 @@
     />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
   </head>
 <body>
+  <!--header-->
+  @include('admin.body.topbar')
+  <!--end-header-->
 
-    <!-- Left Panel -->
 
-    @include('admin.body.sidebar')
+    <!--sidebar-->
+  @include('admin.body.sidebar')
+    <!--end-sidebar-->
 
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-      <!-- Header-->
-
-      <!-- /header -->
-      <!-- Header-->
-
-      <div class="breadcrumbs">
-        <div class="col-sm-4">
-          <div class="page-header float-left">
-            <div class="page-title">
-              <h1>Data Table 1</h1>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-sm-8">
-          <div class="page-header float-right">
-            <div class="page-title">
-              <ol class="breadcrumb text-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Table</a></li>
-                <li class="active">Data table</li>
-              </ol>
-            </div>
-          </div>
-        </div>-->
-      </div>
-
-<div class="content mt-3">
+      <!--content-->
+      <div class="content mt-3">
     <!-- the working one -->
     <form method="GET" action="{{ route('view.pageone') }}">
         <div class="">
@@ -122,9 +89,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Data Table</strong>
-                    </div>
+
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
@@ -214,6 +179,6 @@ $(document).ready(function(){
 
 <!-- Initialize DataTables (Must be after DataTables scripts) -->
 <script src="{{ asset('backend/admin_assets/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
-
+<!--end-content-->
 </body>
 </html>

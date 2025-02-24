@@ -19,16 +19,26 @@ class PageOneExport implements FromCollection
     }
 
     public function collection()
-    {
-        // Apply filter based on the selected option and value
-        if ($this->selectOption && $this->optionsvalue) {
-            return PageOneManagment::join('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
-                ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU')
-                ->where($this->selectOption, 'like', '%' . $this->optionsvalue . '%')
-                ->get();
-        }
+{
+    
+    $headers = [
+        ['ACCOUNT', 'WHS', 'KEYS', 'MENU'] 
+    ];
 
+    // Apply filter based on the selected option and value
+    if ($this->selectOption && $this->optionsvalue) {
+        $data = PageOneManagment::join('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
+            ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU')
+            ->where($this->selectOption, 'like', '%' . $this->optionsvalue . '%')
+            ->get()
+            ->toArray();
+    } else {
         // Return all data if no filter is selected
-        return PageOneManagment::all();
+        $data = PageOneManagment::all(['ACCOUNT', 'WHS', 'KEYS'])->toArray();
     }
+
+    // Merge headers with data
+    return collect(array_merge($headers, $data));
+}
+
 }

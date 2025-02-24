@@ -56,10 +56,15 @@ class PageOneManagmentController extends Controller
     if ($request->has('export')) {
         $selectOption = $request->selectOption;
         $optionsvalue = $request->optionsvalue;
-        return Excel::download(new PageOneExport($selectOption, $optionsvalue), 'pageone_export.xlsx');
+    
+    
+        $filename = 'TABLE_ONE_' . ($selectOption ?: 'export') . '.xlsx';
+    
+        return Excel::download(new PageOneExport($selectOption, $optionsvalue), $filename);
     }
+    
 
-    // Return the view with initial data and options
+    
     return view('admin.indexpone', compact('data', 'columns', 'options'));
 }
 }

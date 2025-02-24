@@ -28,6 +28,7 @@ require __DIR__.'/auth.php';
 Route::get('/view/page/one', [PageOneManagmentController::class, 'ViewPageOne'])->name('view.pageone');
 Route::get('/view/page/two', [PageTwoManagmentController::class, 'ViewPageTwo'])->name('view.pagetwo');
 Route::get('/admin/index', [AdminController::class, 'AdminIndex'])->name('admin.index');
+Route::get('/admin/export-page-two', [PageTwoManagmentController::class, 'exportToExcel'])->name('export.page.two');
 
 
 
