@@ -31,6 +31,8 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/admin/export-page-two', [PageTwoManagmentController::class, 'exportToExcel'])->name('export.page.two');
     Route::get('/export-pageone', function () {
         return Excel::download(new PageOneExport, 'pageone.xlsx');});
+        Route::get('/chart', [PageOneManagmentController::class, 'ViewPageOne']);
+        Route::get('/chart-data', [PageOneManagmentController::class, 'getPieChartData']);
         
 });
 

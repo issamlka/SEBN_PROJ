@@ -67,4 +67,31 @@ class PageOneManagmentController extends Controller
     
     return view('admin.indexpone', compact('data', 'columns', 'options'));
 }
+
+// Separate function to get pie chart data
+public function getPieChartData()
+{
+    $totalKeys = DB::table('pageone')->count();
+
+    // Get count of each KEYS prefix
+    $keysData = DB::table('pageone')
+        ->selectRaw('LEFT(`KEYS`, 2) as KEYS_PREFIX, COUNT(*) as count')
+        ->groupBy('KEYS_PREFIX')
+        ->orderBy('KEYS_PREFIX', 'asc')
+        ->get();
+
+    // Prepare response
+    $labels = $keysData->pluck('KEYS_PREFIX');
+    $counts = $keysData->pluck('count');
+
+    // Calculate percentages
+    $percentages = $counts->map(function ($count) use ($totalKeys) {
+        return round(($count / $totalKeys) * 100, 2);
+    });
+
+    return response()->json([
+        'labels' => $labels,
+        'percentages' => $percentages,
+    ]);
+}
 }

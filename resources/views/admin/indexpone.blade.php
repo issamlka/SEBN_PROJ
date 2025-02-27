@@ -41,8 +41,22 @@
       rel="stylesheet"
       type="text/css"
     />
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Set a fixed size for the chart */
+        #chart-container {
+            width: 500px;
+            height: 500px;
+            margin: auto; /* Center the chart */
+        }
+
+        canvas {
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+    </style>
 
   </head>
 <body>
@@ -119,6 +133,12 @@
         </div>
     </div>
 </div>
+
+
+    
+    
+
+    
 
 
         <script>
