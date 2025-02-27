@@ -13,6 +13,6 @@ class AdminMiddleware
         if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
         }
-        return redirect('admin.login')->with('error', 'You do not have access to this page.');
+        return redirect('/admin/login')->with('error', 'You do not have access to this page.');
     }
 }

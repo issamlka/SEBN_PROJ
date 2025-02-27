@@ -13,18 +13,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DataTableController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/admin/login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
 
@@ -40,7 +35,6 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 });
 
 Route::get('/admin/login', [LoginController::class, 'AdminLogin'])->name('admin.login');
-
 
 // Public routes (accessible to all users)
 Route::get('/yassin/data', [DataTableController::class, 'getUsers'])->name('users.data');
