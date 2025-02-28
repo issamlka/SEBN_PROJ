@@ -10,7 +10,7 @@ class PageOneManagment extends Model
 {
     use HasFactory;
 
-    protected $table = 'pageone'; // Explicitly set the table name
+    protected $table = 'xu_tbl_keys'; // Explicitly set the table name
 
     public $timestamps = false; // Disable timestamps
 }

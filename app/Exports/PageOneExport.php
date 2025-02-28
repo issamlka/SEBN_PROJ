@@ -27,8 +27,8 @@ class PageOneExport implements FromCollection
 
     // Apply filter based on the selected option and value
     if ($this->selectOption && $this->optionsvalue) {
-        $data = PageOneManagment::join('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
-            ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU')
+        $data = PageOneManagment::join('xu_tbl_users', 'xu_tbl_keys.ACCOUNT', '=', 'xu_tbl_users.ACCOUNT')
+            ->select('xu_tbl_keys.ACCOUNT', 'xu_tbl_keys.WHS', 'xu_tbl_keys.KEYS', 'xu_tbl_users.MENU')
             ->where($this->selectOption, 'like', '%' . $this->optionsvalue . '%')
             ->get()
             ->toArray();

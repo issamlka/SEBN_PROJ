@@ -9,7 +9,7 @@ class PageTwoManagment extends Model
 {
     use HasFactory;
 
-    protected $table = 'pagetwo'; // Explicitly set the table name
+    protected $table = 'xu_tbl_users'; // Explicitly set the table name
 
     public $timestamps = false; // Disable timestamps
 }

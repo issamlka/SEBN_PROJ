@@ -21,18 +21,18 @@ class PageOneManagmentController extends Controller
     ];
 
     // Define the base query to get data
-    $query = DB::table('pageone')
-        ->leftJoin('pagetwo', 'pageone.ACCOUNT', '=', 'pagetwo.ACCOUNT')
-        ->select('pageone.ACCOUNT', 'pageone.WHS', 'pageone.KEYS', 'pagetwo.MENU');
+    $query = DB::table('xu_tbl_keys')
+        ->leftJoin('xu_tbl_users', 'xu_tbl_keys.ACCOUNT', '=', 'xu_tbl_users.ACCOUNT')
+        ->select('xu_tbl_keys.ACCOUNT', 'xu_tbl_keys.WHS', 'xu_tbl_keys.KEYS', 'xu_tbl_users.MENU');
 
     // Query to fetch data initially without any filters
     $data = $query->get();
 
     // Prepare options for dropdowns
     $options = [
-        'WHS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->orderBy('WHS', 'asc')->pluck('WHS'),
-        'KEYS' => DB::table('pageone')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->orderBy('KEYS', 'asc')->pluck('KEYS'),
-        'MENU' => DB::table('pagetwo')->distinct()->orderBy('MENU', 'asc')->pluck('MENU'),
+        'WHS' => DB::table('xu_tbl_keys')->selectRaw('DISTINCT LEFT(WHS, 2) as WHS')->orderBy('WHS', 'asc')->pluck('WHS'),
+        'KEYS' => DB::table('xu_tbl_keys')->selectRaw('DISTINCT LEFT(`KEYS`, 2) as `KEYS`')->orderBy('KEYS', 'asc')->pluck('KEYS'),
+        'MENU' => DB::table('xu_tbl_users')->distinct()->orderBy('MENU', 'asc')->pluck('MENU'),
     ];
 
     // Handle filtering via AJAX
@@ -60,7 +60,7 @@ class PageOneManagmentController extends Controller
     
         $filename = 'TABLE_ONE_' . ($selectOption ?: 'export') . '.xlsx';
     
-        return Excel::download(new PageOneExport($selectOption, $optionsvalue), $filename);
+        return Excel::download(new xu_tbl_keysExport($selectOption, $optionsvalue), $filename);
     }
     
 
@@ -71,10 +71,10 @@ class PageOneManagmentController extends Controller
 // Separate function to get pie chart data
 public function getPieChartData()
 {
-    $totalKeys = DB::table('pageone')->count();
+    $totalKeys = DB::table('xu_tbl_keys')->count();
 
     // Get count of each KEYS prefix
-    $keysData = DB::table('pageone')
+    $keysData = DB::table('xu_tbl_keys')
         ->selectRaw('LEFT(`KEYS`, 2) as KEYS_PREFIX, COUNT(*) as count')
         ->groupBy('KEYS_PREFIX')
         ->orderBy('KEYS_PREFIX', 'asc')

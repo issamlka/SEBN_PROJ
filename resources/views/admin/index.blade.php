@@ -78,6 +78,9 @@
             <th>NAME</th>
             <th>MENU</th>
             <th>GS MENU</th>
+            <th>ID</th>
+            <th>DEPARTMENT</th>
+            <th>LOCATION</th>
         </tr>
     </thead>
     <tbody>
@@ -87,6 +90,9 @@
             <td>{{ $item->NAME }}</td>
             <td>{{ $item->MENU }}</td>
             <td>{{ $item->GS_MENU }}</td>
+            <td>{{ $item->ID }}</td>
+            <td>{{ $item->DEPARTMENT }}</td>
+            <td>{{ $item->LOCATION }}</td>
         </tr>
     @endforeach
     </tbody>

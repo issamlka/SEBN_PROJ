@@ -41,5 +41,5 @@ Route::get('/admin/login', [LoginController::class, 'AdminLogin'])->name('admin.
 // Public routes (accessible to all users)
 Route::get('/yassin/data', [DataTableController::class, 'getUsers'])->name('users.data');
 Route::get('/users', function () {
-    return view('users');
+    return view('xu_tbl_login');
 });

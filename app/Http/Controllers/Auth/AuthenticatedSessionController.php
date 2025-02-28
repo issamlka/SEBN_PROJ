@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
     $request->session()->regenerate();
 
     // Redirect to /view/page/one after login
-    return redirect()->intended(route('view.pageone'));
+    return redirect()->intended(route('view.pagetwo'));
 }
 
 

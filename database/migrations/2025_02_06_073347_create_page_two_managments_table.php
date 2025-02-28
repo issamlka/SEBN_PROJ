@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('NAME');
             $table->string('MENU');
             $table->string('GS_MENU');
+            $table->string('ID');
+            $table->string('DEPARTMENT');
+            $table->string('LOCATION');
             $table->timestamps();
         });
     }

@@ -4,8 +4,8 @@
   </div>
   <nav>
     <ul>
-      <li><a href="{{ route('view.pageone') }}">Keys Table</a></li>
-      <li><a href="{{ route('view.pagetwo') }}">Main Table</a></li>
+    <li><a href="{{ route('view.pagetwo') }}">Users</a></li>
+      <li><a href="{{ route('view.pageone') }}">Keys Affectation</a></li>
     </ul>
   </nav>
   <div class="logout-container">

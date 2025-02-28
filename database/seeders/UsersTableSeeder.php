@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
+        DB::table('xu_tbl_login')->insert([
             //admin
             [
                 'name'=>'admin1',

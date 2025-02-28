@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pageone', function (Blueprint $table) {
+        Schema::table('xu_tbl_keys', function (Blueprint $table) {
             //
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pageone', function (Blueprint $table) {
+        Schema::table('xu_tbl_keys', function (Blueprint $table) {
             //
         });
     }
