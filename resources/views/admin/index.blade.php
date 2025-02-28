@@ -52,7 +52,7 @@
 
 
     <!--sidebar-->
-  @include('admin.body.sidebar')
+  
     <!--end-sidebar-->
 
       <!--content-->

@@ -71,6 +71,7 @@
 
       <!--content-->
       <div class="content mt-3">
+      <button id="toggleSidebar" class="toggle-btn">☰</button>
     <!-- the working one -->
     <form method="GET" action="{{ route('view.pageone') }}">
         <div class="">
@@ -136,7 +137,11 @@
 
 
     
-    
+<script>
+    document.getElementById("toggleSidebar").addEventListener("click", function() {
+        document.getElementById("sidebar").classList.toggle("closed");
+    });
+</script>    
 
     
 

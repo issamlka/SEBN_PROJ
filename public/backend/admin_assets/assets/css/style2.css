@@ -57,10 +57,12 @@
 }
 
 .sidebar2 {
-    width: 350px;
+    width: 400px;
     background-color: #f4f4f4;
     padding: 20px;
     min-height: 100vh;
+    transition: all 0.3s;
+    overflow: hidden;
 }
 
 .sidebar2 ul {
@@ -116,4 +118,23 @@ nav ul {
 
 .logout-button:hover {
     background-color: #e60000;
+}
+
+.sidebar2.closed {
+    width: 0;
+    padding: 0;
+}
+
+.toggle-btn {
+    background-color: #f7f7f7;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+
+.toggle-btn:hover {
+    background-color: #d5d5d5;
 }

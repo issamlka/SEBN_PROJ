@@ -1,11 +1,16 @@
 <div class="container2">
-      <aside class="sidebar2">
+<aside class="sidebar2" id="sidebar">
+
         <ul>
         <div id="chart-container">
         <canvas id="keysPieChart"></canvas>
     </div>
         </ul>
       </aside>
+
+     
+
+
       <script>
         $(document).ready(function() {
             $.ajax({
